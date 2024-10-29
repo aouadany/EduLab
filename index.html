@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Page SWF with Ruffle</title>
+    <script src="ruffle.js"></script> <!-- Ensure ruffle.js is loaded correctly -->
+
+    <style>
+        /* Remove default margins and set full height */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Style the container for full-page SWF */
+        #swf-container {
+            width: 100%;
+            height: 100%;
+        }
+
+/* Define multiple fonts */
+        @font-face {
+            font-family: 'EDUGR10';
+            src: url('EDUGR10.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GG Subscript';
+            src: url('GGSUBSCR.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GG Superscript';
+            src: url('GGSUPERS.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'EDULAB';
+            src: url('EduLab.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Verdana';
+            src: url('verdana.ttf') format('truetype');
+        }
+    </style>
+</head>
+<body>
+    <!-- Full-page SWF embedded via Ruffle -->
+    <div id="swf-container">
+        <object data="chapter-1.swf" width="100%" height="100%"></object>
+    </div>
+</body>
+</html>

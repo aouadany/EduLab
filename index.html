@@ -77,5 +77,22 @@
     <div id="swf-container">
         <object data="chapter-1.swf" width="100%" height="100%"></object>
     </div>
+    function goFullScreen(){
+
+        var elem = document.getElementById("swf-container");
+
+        if(elem.requestFullscreen){
+            elem.requestFullscreen();
+        }
+        else if(elem.mozRequestFullScreen){
+            elem.mozRequestFullScreen();
+        }
+        else if(elem.webkitRequestFullscreen){
+            elem.webkitRequestFullscreen();
+        }
+        else if(elem.msRequestFullscreen){
+            elem.msRequestFullscreen();
+        }
+    }
 </body>
 </html>

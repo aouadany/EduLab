@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLab-Sample</title>
+    <script src="ruffle.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -39,45 +40,40 @@
         <p>Loading...</p>
     </div>
     <div id="swf-container"></div>
-    <script src="ruffle.js"></script>
     <script>
-        window.RufflePlayer = {
-            config: {
-                autoplay: "on",
-                unmuteOverlay: "hidden",
-                scale: "showAll",
-                letterbox: "on",
-                hideSwfDownloadButton: true,
-                customLoadingScreen: false,
-                fontsSources: [
-                    "https://aouadany.github.io/EduLab/EDUGR10.TTF",
-                    "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
-                    "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
-                    "https://aouadany.github.io/EduLab/EduLab.TTF",
-                    "https://aouadany.github.io/EduLab/verdana.TTF"
-                ]
-            }
+        window.RufflePlayer.config = {
+            autoplay: "on",
+            unmuteOverlay: "hidden",
+            scale: "showAll",
+            letterbox: "on",
+            fontsSources: [
+                "https://aouadany.github.io/EduLab/EDUGR10.TTF",
+                "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
+                "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
+                "https://aouadany.github.io/EduLab/EduLab.TTF",
+                "https://aouadany.github.io/EduLab/verdana.TTF"
+            ]
         };
 
-        window.addEventListener("load", async () => {
+        window.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById("swf-container");
             const loadingScreen = document.getElementById("loading-screen");
             
-            try {
-                const ruffle = window.RufflePlayer.newest();
-                const player = ruffle.createPlayer();
-                container.appendChild(player);
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            container.appendChild(player);
 
-                player.addEventListener("loadeddata", () => {
+            try {
+                player.load("chapter-1.swf");
+                
+                setTimeout(() => {
                     loadingScreen.style.display = "none";
-                });
+                }, 2000);
 
                 player.addEventListener("error", (e) => {
                     loadingScreen.innerHTML = "<p>Error loading content</p>";
                     console.error(e);
                 });
-
-                await player.load("chapter-1.swf");
             } catch (error) {
                 loadingScreen.innerHTML = "<p>Failed to load content</p>";
                 console.error(error);

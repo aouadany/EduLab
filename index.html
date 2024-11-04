@@ -29,6 +29,7 @@
             width: 100%;
             height: 100%;
         }
+        
         @font-face {
             font-family: 'EduLab/EDUGR10';
             src: url('https://aouadany.github.io/EduLab/EDUGR10.TTF') format('truetype');
@@ -50,7 +51,6 @@
             src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
         }
     </style>
-
     <script>
         // Fullscreen function
         function goFullScreen() {
@@ -81,7 +81,7 @@
             };
 
             player.load("chapter-1.swf");
-            document.getElementById("swf-container").appendChild(player);
+            document.getElementById("loading-text").style.display = "none"; // Assuming there's a loading-text element
         });
     </script>
 </head>
@@ -90,6 +90,8 @@
     <button onclick="goFullScreen()">Go Fullscreen</button>
 
     <!-- Full-page SWF embedded via Ruffle -->
-    <div id="swf-container"></div>
+    <div id="swf-container">
+        <object data="chapter-1.swf" width="100%" height="100%"></object>
+    </div>
 </body>
 </html>

@@ -52,6 +52,7 @@
 }
 
     </style>
+        
     <script>
     // Load the Ruffle player and embed the SWF file
     window.addEventListener("load", () => {
@@ -69,17 +70,10 @@
 
         player.load("chapter-1.swf");
         document.getElementById("loading-text").style.display = "none";
-    });
-</script>
-</head>
-<body>
-    <!-- Full-page SWF embedded via Ruffle -->
-    <div id="swf-container">
-        <object data="chapter-1.swf" width="100%" height="100%"></object>
-    </div>
-    function goFullScreen(){
 
-        var elem = document.getElementById(swf-container);
+        function goFullScreen(){
+
+        var elem = document.getElementById("chapter-1.swf");
 
         if(elem.requestFullscreen){
             elem.requestFullscreen();
@@ -94,5 +88,14 @@
             elem.msRequestFullscreen();
         }
     }
+    });
+</script>
+</head>
+<body>
+    <!-- Full-page SWF embedded via Ruffle -->
+    <div id="swf-container">
+        <object data="chapter-1.swf" width="100%" height="100%"></object>
+    </div>
+
 </body>
 </html>

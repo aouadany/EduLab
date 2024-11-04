@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLab-Sample</title>
-    <script src="ruffle.js"></script> <!-- Ensure ruffle.js is loaded correctly -->
-
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         /* Remove default margins and set full height */
         html, body {
@@ -15,44 +14,44 @@
             padding: 0;
             overflow: hidden;
         }
-
         /* Style the container for full-page SWF */
         #swf-container {
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-/* Define multiple fonts */
+        /* Define multiple fonts */
         @font-face {
             font-family: 'EDUGR10';
-            src: url('EDUGR10.ttf') format('truetype');
+            src: url('Fonts/EDUGR10.ttf') format('truetype');
         }
-
         @font-face {
             font-family: 'GG Subscript';
-            src: url('GGSUBSCR.ttf') format('truetype');
+            src: url('Fonts/GGSUBSCR.ttf') format('truetype');
         }
-
         @font-face {
             font-family: 'GG Superscript';
-            src: url('GGSUPERS.ttf') format('truetype');
+            src: url('Fonts/GGSUPERS.ttf') format('truetype');
         }
-
         @font-face {
             font-family: 'EDULAB';
-            src: url('EduLab.ttf') format('truetype');
+            src: url('Fonts/EduLab.ttf') format('truetype');
         }
-
         @font-face {
             font-family: 'Verdana';
-            src: url('verdana.ttf') format('truetype');
+            src: url('Fonts/verdana.ttf') format('truetype');
+        }
+        #loading-text {
+            font-family: 'EDULAB', sans-serif;
+            font-size: 2rem;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <!-- Full-page SWF embedded via Ruffle -->
     <div id="swf-container">
-        <object data="chapter-1.swf" width="100%" height="100%"></object>
+        <div id="loading-text">Loading, please wait...</div>
     </div>
-</body>
-</html>

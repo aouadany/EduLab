@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLab-Sample</title>
-    <script src="ruffle.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -40,19 +39,24 @@
         <p>Loading...</p>
     </div>
     <div id="swf-container"></div>
+    <script src="ruffle.js"></script>
     <script>
-        window.RufflePlayer.config = {
-            autoplay: "on",
-            unmuteOverlay: "hidden",
-            scale: "showAll",
-            letterbox: "on",
-            fontsSources: [
-                "https://aouadany.github.io/EduLab/EDUGR10.TTF",
-                "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
-                "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
-                "https://aouadany.github.io/EduLab/EduLab.TTF",
-                "https://aouadany.github.io/EduLab/verdana.TTF"
-            ]
+        window.RufflePlayer = {
+            config: {
+                autoplay: "on",
+                unmuteOverlay: "hidden",
+                scale: "showAll",
+                letterbox: "on",
+                hideSwfDownloadButton: true,
+                customLoadingScreen: false,
+                fontsSources: [
+                    "https://aouadany.github.io/EduLab/EDUGR10.TTF",
+                    "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
+                    "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
+                    "https://aouadany.github.io/EduLab/EduLab.TTF",
+                    "https://aouadany.github.io/EduLab/verdana.TTF"
+                ]
+            }
         };
 
         window.addEventListener("DOMContentLoaded", () => {

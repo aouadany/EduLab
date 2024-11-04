@@ -24,13 +24,13 @@
     <div id="loading-screen">
         <p>Loading...</p>
     </div>
-
     <div id="swf-container" style="display: none;"></div>
-
     <script>
         window.addEventListener("load", () => {
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
+            const container = document.getElementById("swf-container");
+            
             player.config = {
                 fontsSources: [
                     "https://aouadany.github.io/EduLab/EDUGR10.TTF",
@@ -41,11 +41,24 @@
                 ]
             };
 
-            player.load("chapter-1.swf");
-            player.addEventListener("loaded", () => {
-                document.getElementById("swf-container").appendChild(player);
+            // Add error handling
+            player.addEventListener("error", (e) => {
+                console.error("Ruffle error:", e);
+                document.getElementById("loading-screen").innerHTML = 
+                    "<p>Error loading content. Please refresh the page.</p>";
+            });
+
+            // Add the player to container before loading the SWF
+            container.appendChild(player);
+
+            // Load the SWF file
+            player.load("chapter-1.swf").then(() => {
                 document.getElementById("loading-screen").style.display = "none";
-                document.getElementById("swf-container").style.display = "block";
+                container.style.display = "block";
+            }).catch((error) => {
+                console.error("Failed to load SWF:", error);
+                document.getElementById("loading-screen").innerHTML = 
+                    "<p>Failed to load content. Please refresh the page.</p>";
             });
         });
     </script>

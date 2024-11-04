@@ -1,11 +1,19 @@
-<!DOCTYPE html> 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+   <!-- Font preloading in the <head> section -->
+<link rel="preload" href="https://aouadany.github.io/EduLab/EDUGR10.TTF" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://aouadany.github.io/EduLab/GGSUBSCR.TTF" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://aouadany.github.io/EduLab/GGSUPERS.TTF" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://aouadany.github.io/EduLab/EduLab.TTF" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://aouadany.github.io/EduLab/verdana.TTF" as="font" type="font/ttf" crossorigin="anonymous">
+
     <title>EduLab-Sample</title>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script src="ruffle.js"></script> <!-- Ensure ruffle.js is loaded correctly -->
 
     <style>
         /* Remove default margins and set full height */
@@ -21,71 +29,53 @@
         #swf-container {
             width: 100%;
             height: 100%;
-        }
-        
-        @font-face {
-            font-family: 'EduLab/EDUGR10';
-            src: url('https://aouadany.github.io/EduLab/EDUGR10.TTF') format('truetype');
-        }
-        @font-face {
-            font-family: 'GG Subscript';
-            src: url('https://aouadany.github.io/EduLab/GGSUBSCR.TTF') format('truetype');
-        }
-        @font-face {
-            font-family: 'GG Superscript';
-            src: url('https://aouadany.github.io/EduLab/GGSUPERS.TTF') format('truetype');
-        }
-        @font-face {
-            font-family: 'EDULAB';
-            src: url('https://aouadany.github.io/EduLab/EduLab.TTF') format('truetype');
-        }
-        @font-face {
-            font-family: 'Verdana';
-            src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
-        }
+       }
+       @font-face {
+    font-family: 'EduLab/EDUGR10';
+    src: url('https://aouadany.github.io/EduLab/EDUGR10.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'GG Subscript';
+    src: url('https://aouadany.github.io/EduLab/GGSUBSCR.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'GG Superscript';
+    src: url('https://aouadany.github.io/EduLab/GGSUPERS.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'EDULAB';
+    src: url('https://aouadany.github.io/EduLab/EduLab.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Verdana';
+    src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
+}
+
     </style>
+    <script>
+    // Load the Ruffle player and embed the SWF file
+    window.addEventListener("load", () => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        player.config = {
+    fontsSources: [
+        "https://aouadany.github.io/EduLab/EDUGR10.TTF",
+        "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
+        "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
+        "https://aouadany.github.io/EduLab/EduLab.TTF",
+        "https://aouadany.github.io/EduLab/verdana.TTF"
+    ]
+};
 
-
-        // Load the Ruffle player and embed the SWF file
-        window.addEventListener("load", () => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            player.config = {
-     fontsSources: [
-                    "https://aouadany.github.io/EduLab/EDUGR10.TTF",
-                    "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
-                    "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
-                    "https://aouadany.github.io/EduLab/EduLab.TTF",
-                    "https://aouadany.github.io/EduLab/verdana.TTF"
-                ]
-            };
-
-            player.load("chapter-1.swf");
-            document.getElementById("loading-text").style.display = "none"; // Assuming there's a loading-text element
-        });
-    </script>
+        player.load("chapter-1.swf");
+        document.getElementById("loading-text").style.display = "none";
+    });
+</script>
 </head>
 <body>
-        <!-- Full-page SWF embedded via Ruffle -->
+    <!-- Full-page SWF embedded via Ruffle -->
     <div id="swf-container">
         <object data="chapter-1.swf" width="100%" height="100%"></object>
-            </div>
-    function goFullScreen(){
-
-        var elem = document.getElementById("swf-container");
-
-        if(elem.requestFullscreen){
-            elem.requestFullscreen();
-        }
-        else if(elem.mozRequestFullScreen){
-            elem.mozRequestFullScreen();
-        }
-        else if(elem.webkitRequestFullscreen){
-            elem.webkitRequestFullscreen();
-        }
-        else if(elem.msRequestFullscreen){
-            elem.msRequestFullscreen();
-        }
-    }
+    </div>
 </body>
 </html>

@@ -59,25 +59,25 @@
             }
         };
 
-        window.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener("load", async () => {
             const container = document.getElementById("swf-container");
             const loadingScreen = document.getElementById("loading-screen");
             
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            container.appendChild(player);
-
             try {
-                player.load("chapter-1.swf");
-                
-                setTimeout(() => {
+                const ruffle = window.RufflePlayer.newest();
+                const player = ruffle.createPlayer();
+                container.appendChild(player);
+
+                player.addEventListener("loadeddata", () => {
                     loadingScreen.style.display = "none";
-                }, 2000);
+                });
 
                 player.addEventListener("error", (e) => {
                     loadingScreen.innerHTML = "<p>Error loading content</p>";
                     console.error(e);
                 });
+
+                await player.load("chapter-1.swf");
             } catch (error) {
                 loadingScreen.innerHTML = "<p>Failed to load content</p>";
                 console.error(error);

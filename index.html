@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLab-Sample</title>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         /* Remove default margins and set full height */
         html, body {
@@ -55,3 +55,25 @@
     <div id="swf-container">
         <div id="loading-text">Loading, please wait...</div>
     </div>
+
+    <script>
+        // Load the Ruffle player and embed the SWF file
+        window.addEventListener("load", () => {
+            const ruffle = await RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            player.config = {
+                allowScriptAccess: true,
+                fontsSources: [
+                    "Fonts/EDUGR10.ttf",
+                    "Fonts/GGSUBSCR.ttf",
+                    "Fonts/GGSUPERS.ttf",
+                    "Fonts/EduLab.ttf",
+                    "Fonts/verdana.ttf"
+                ]
+            };
+            player.load("chapter-1.swf");
+            document.getElementById("loading-text").style.display = "none";
+        });
+    </script>
+</body>
+</html>

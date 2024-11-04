@@ -58,8 +58,8 @@
 
     <script>
         // Load the Ruffle player and embed the SWF file
-        window.addEventListener("load", () => {
-            const ruffle = await RufflePlayer.newest();
+        window.addEventListener("load", async () => {
+            const ruffle = RufflePlayer.newest();
             const player = ruffle.createPlayer();
             player.config = {
                 allowScriptAccess: true,
@@ -72,6 +72,11 @@
                 ]
             };
             player.load("chapter-1.swf");
+
+            // Add the player to the SWF container
+            document.getElementById("swf-container").appendChild(player);
+
+            // Hide the loading text once the player loads
             document.getElementById("loading-text").style.display = "none";
         });
     </script>

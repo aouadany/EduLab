@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLab-Sample</title>
-    <script src="ruffle.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -40,45 +39,69 @@
         <p>Loading...</p>
     </div>
     <div id="swf-container"></div>
+    <script src="ruffle.js"></script>
     <script>
-        window.RufflePlayer.config = {
-            autoplay: "on",
-            unmuteOverlay: "hidden",
-            scale: "showAll",
-            letterbox: "on",
-            fontsSources: [
-                "https://aouadany.github.io/EduLab/EDUGR10.TTF",
-                "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
-                "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
-                "https://aouadany.github.io/EduLab/EduLab.TTF",
-                "https://aouadany.github.io/EduLab/verdana.TTF"
-            ]
-        };
+        // First, check if Ruffle is loaded
+        if (typeof window.RufflePlayer === "undefined") {
+            document.getElementById("loading-screen").innerHTML = 
+                "<p>Error: Ruffle is not loaded. Check if ruffle.js exists in the correct location.</p>";
+        } else {
+            window.RufflePlayer = {
+                config: {
+                    autoplay: "on",
+                    unmuteOverlay: "hidden",
+                    scale: "showAll",
+                    letterbox: "on",
+                    hideSwfDownloadButton: true,
+                    customLoadingScreen: false,
+                    fontsSources: [
+                        "https://aouadany.github.io/EduLab/EDUGR10.TTF",
+                        "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
+                        "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
+                        "https://aouadany.github.io/EduLab/EduLab.TTF",
+                        "https://aouadany.github.io/EduLab/verdana.TTF"
+                    ]
+                }
+            };
 
-        window.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("swf-container");
-            const loadingScreen = document.getElementById("loading-screen");
-            
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            container.appendChild(player);
-
-            try {
-                player.load("chapter-1.swf");
+            window.addEventListener("load", () => {
+                const container = document.getElementById("swf-container");
+                const loadingScreen = document.getElementById("loading-screen");
                 
-                setTimeout(() => {
-                    loadingScreen.style.display = "none";
-                }, 2000);
+                try {
+                    const ruffle = window.RufflePlayer.newest();
+                    const player = ruffle.createPlayer();
+                    container.appendChild(player);
 
-                player.addEventListener("error", (e) => {
-                    loadingScreen.innerHTML = "<p>Error loading content</p>";
-                    console.error(e);
-                });
-            } catch (error) {
-                loadingScreen.innerHTML = "<p>Failed to load content</p>";
-                console.error(error);
-            }
-        });
+                    // Try to load the SWF file
+                    player.load({
+                        url: "chapter-1.swf",
+                        allowScriptAccess: true
+                    }).catch(error => {
+                        console.error("Load error:", error);
+                        loadingScreen.innerHTML = 
+                            `<p>Error loading SWF file: ${error.message}<br>
+                            Please check if 'chapter-1.swf' exists in the correct location.</p>`;
+                    });
+
+                    player.addEventListener("loadeddata", () => {
+                        loadingScreen.style.display = "none";
+                    });
+
+                    player.addEventListener("error", (e) => {
+                        console.error("Player error:", e);
+                        loadingScreen.innerHTML = 
+                            `<p>Error playing content: ${e.detail}<br>
+                            Please check browser console for more details.</p>`;
+                    });
+
+                } catch (error) {
+                    console.error("Setup error:", error);
+                    loadingScreen.innerHTML = 
+                        `<p>Failed to setup player: ${error.message}</p>`;
+                }
+            });
+        }
     </script>
 </body>
 </html>

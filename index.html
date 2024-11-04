@@ -50,35 +50,6 @@
         }
     </style>
 </head>
-<body>
-    <!-- Full-page SWF embedded via Ruffle -->
-    <div id="swf-container">
-        <div id="loading-text">Loading, please wait...</div>
-    </div>
 
-    <script>
-        // Load the Ruffle player and embed the SWF file
-        window.addEventListener("load", async () => {
-            const ruffle = RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            player.config = {
-                allowScriptAccess: true,
-                fontsSources: [
-                    "Fonts/EDUGR10.ttf",
-                    "Fonts/GGSUBSCR.ttf",
-                    "Fonts/GGSUPERS.ttf",
-                    "Fonts/EduLab.ttf",
-                    "Fonts/verdana.ttf"
-                ]
-            };
-            player.load("chapter-1.swf");
-
-            // Add the player to the SWF container
-            document.getElementById("swf-container").appendChild(player);
-
-            // Hide the loading text once the player loads
-            document.getElementById("loading-text").style.display = "none";
-        });
-    </script>
 </body>
 </html>

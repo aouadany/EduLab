@@ -15,25 +15,13 @@
     <title>EduLab-Sample</title>
     <script src="ruffle.js"></script> <!-- Ensure ruffle.js is loaded correctly -->
 
-    function goFullScreen(){
-
-        var elem = document.getElementById("chapter-1.swf");
-
-        if(elem.requestFullscreen){
-            elem.requestFullscreen();
+    <script>
+        // Function related to a specific div with an ID
+        function handleDivClick() {
+            // Add your logic here to handle the click event on the div
+            console.log("Div clicked!");
         }
-        else if(elem.mozRequestFullScreen){
-            elem.mozRequestFullScreen();
-        }
-        else if(elem.webkitRequestFullscreen){
-            elem.webkitRequestFullscreen();
-        }
-        else if(elem.msRequestFullscreen){
-            elem.msRequestFullscreen();
-        }
-    }
-    };
-
+    </script>
     <style>
         /* Remove default margins and set full height */
         html, body {
@@ -93,11 +81,38 @@
         
 </script>
 </head>
-<body>
-    <!-- Full-page SWF embedded via Ruffle -->
-    <div id="swf-container">
+<div id="swf-container">
         <object data="chapter-1.swf" width="100%" height="100%"></object>
     </div>
 
+    <!-- Hidden trigger element for fullscreen -->
+    <button id="fullscreen-trigger" style="display: none;"></button>
+
+    <script>
+        // Simulate click event on hidden trigger element
+        document.getElementById("fullscreen-trigger").addEventListener("click", function() {
+            var elem = document.querySelector("object");
+            if (elem) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                console.error("No <object> element found.");
+            }
+        });
+
+        // Trigger fullscreen when a specific event occurs (e.g., user interaction)
+        // For example, when the Flash content is clicked
+        document.querySelector("object").addEventListener("click", function() {
+            document.getElementById("fullscreen-trigger").click();
+            handleDivClick(); // Call the function related to the div ID
+        });
+    </script>
 </body>
 </html>

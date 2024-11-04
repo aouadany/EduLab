@@ -44,7 +44,15 @@
             src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
         }
     </style>
-// Listen for a user click event on the Flash content
+
+
+        // Load the Ruffle player and embed the SWF file
+        window.addEventListener("load", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            player.config = {
+
+    // Listen for a user click event on the Flash content
 document.querySelector("object").addEventListener("click", function() {
     var elem = document.querySelector("object");
     if (elem) {
@@ -61,12 +69,6 @@ document.querySelector("object").addEventListener("click", function() {
         console.error("No <object> element found.");
     }
 });
-
-        // Load the Ruffle player and embed the SWF file
-        window.addEventListener("load", () => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            player.config = {
                 fontsSources: [
                     "https://aouadany.github.io/EduLab/EDUGR10.TTF",
                     "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",

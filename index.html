@@ -15,13 +15,20 @@
     <title>EduLab-Sample</title>
     <script src="ruffle.js"></script> <!-- Ensure ruffle.js is loaded correctly -->
 
-    <script>
-        // Function related to a specific div with an ID
-        function handleDivClick() {
-            // Add your logic here to handle the click event on the div
-            console.log("Div clicked!");
+   <style>
+        #loading-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+            z-index: 9999;
         }
-    </script>
+    </style>
     <style>
         /* Remove default margins and set full height */
         html, body {
@@ -81,38 +88,24 @@
         
 </script>
 </head>
-<div id="swf-container">
-        <object data="chapter-1.swf" width="100%" height="100%"></object>
+<body>
+    <div id="loading-screen">
+        <p>Loading...</p>
     </div>
 
-    <!-- Hidden trigger element for fullscreen -->
-    <button id="fullscreen-trigger" style="display: none;"></button>
+    <div id="swf-container" style="display: none;">
+        <!-- Ruffle will replace this with the Flash content -->
+    </div>
 
     <script>
-        // Simulate click event on hidden trigger element
-        document.getElementById("fullscreen-trigger").addEventListener("click", function() {
-            var elem = document.querySelector("object");
-            if (elem) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.mozRequestFullScreen) {
-                    elem.mozRequestFullScreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen();
-                }
-            } else {
-                console.error("No <object> element found.");
-            }
-        });
-
-        // Trigger fullscreen when a specific event occurs (e.g., user interaction)
-        // For example, when the Flash content is clicked
-        document.querySelector("object").addEventListener("click", function() {
-            document.getElementById("fullscreen-trigger").click();
-            handleDivClick(); // Call the function related to the div ID
-        });
+        // Simulate Ruffle loading delay for demonstration purposes
+        setTimeout(function() {
+            document.getElementById("loading-screen").style.display = "none";
+            document.getElementById("swf-container").style.display = "block";
+            // Initialize Ruffle to load the Flash content
+            // Replace the following line with your Ruffle initialization code
+            // RufflePlayer.run();
+        }, 3000); // Simulating a 3-second loading delay
     </script>
 </body>
 </html>

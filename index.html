@@ -43,6 +43,7 @@
 
             player.load("chapter-1.swf");
             player.addEventListener("loaded", () => {
+                document.getElementById("swf-container").appendChild(player);
                 document.getElementById("loading-screen").style.display = "none";
                 document.getElementById("swf-container").style.display = "block";
             });

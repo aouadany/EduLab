@@ -44,18 +44,21 @@
             src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
         }
     </style>
-    <script>
-       // Fullscreen function
+ // Fullscreen function
 function goFullScreen() {
     var elem = document.querySelector("object");
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
+    if (elem) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    } else {
+        console.error("No <object> element found.");
     }
 }
 

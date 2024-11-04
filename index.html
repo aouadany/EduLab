@@ -45,7 +45,8 @@
         }
     </style>
  // Fullscreen function
-function goFullScreen() {
+// Listen for a user click event on the Flash content
+document.querySelector("object").addEventListener("click", function() {
     var elem = document.querySelector("object");
     if (elem) {
         if (elem.requestFullscreen) {
@@ -60,7 +61,7 @@ function goFullScreen() {
     } else {
         console.error("No <object> element found.");
     }
-}
+});
 
         // Load the Ruffle player and embed the SWF file
         window.addEventListener("load", () => {

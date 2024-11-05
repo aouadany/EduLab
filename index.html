@@ -1,107 +1,90 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EduLab-Sample</title>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
     <style>
-        body, html {
+        /* Remove default margins and set full height */
+        html, body {
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
             overflow: hidden;
         }
-        #loading-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8f8f8;
-            z-index: 9999;
-        }
+
+        /* Style the container for full-page SWF */
         #swf-container {
             width: 100%;
             height: 100%;
         }
-        ruffle-player {
-            width: 100%;
-            height: 100%;
+        
+        @font-face {
+            font-family: 'EduLab/EDUGR10';
+            src: url('https://aouadany.github.io/EduLab/EDUGR10.TTF') format('truetype');
+        }
+        @font-face {
+            font-family: 'GG Subscript';
+            src: url('https://aouadany.github.io/EduLab/GGSUBSCR.TTF') format('truetype');
+        }
+        @font-face {
+            font-family: 'GG Superscript';
+            src: url('https://aouadany.github.io/EduLab/GGSUPERS.TTF') format('truetype');
+        }
+        @font-face {
+            font-family: 'EDULAB';
+            src: url('https://aouadany.github.io/EduLab/EduLab.TTF') format('truetype');
+        }
+        @font-face {
+            font-family: 'Verdana';
+            src: url('https://aouadany.github.io/EduLab/verdana.TTF') format('truetype');
         }
     </style>
-</head>
-<body>
-    <div id="loading-screen">
-        <p>Loading...</p>
-    </div>
-    <div id="swf-container"></div>
-    <script src="ruffle.js"></script>
-    <script>
-        // First, check if Ruffle is loaded
-        if (typeof window.RufflePlayer === "undefined") {
-            document.getElementById("loading-screen").innerHTML = 
-                "<p>Error: Ruffle is not loaded. Check if ruffle.js exists in the correct location.</p>";
-        } else {
-            window.RufflePlayer = {
-                config: {
-                    autoplay: "on",
-                    unmuteOverlay: "hidden",
-                    scale: "showAll",
-                    letterbox: "on",
-                    hideSwfDownloadButton: true,
-                    customLoadingScreen: false,
-                    fontsSources: [
-                        "https://aouadany.github.io/EduLab/EDUGR10.TTF",
-                        "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
-                        "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
-                        "https://aouadany.github.io/EduLab/EduLab.TTF",
-                        "https://aouadany.github.io/EduLab/verdana.TTF"
-                    ]
-                }
+ // Fullscreen function
+function goFullScreen() {
+    var elem = document.querySelector("object");
+    if (elem) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    } else {
+        console.error("No <object> element found.");
+    }
+}
+
+        // Load the Ruffle player and embed the SWF file
+        window.addEventListener("load", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            player.config = {
+                fontsSources: [
+                    "https://aouadany.github.io/EduLab/EDUGR10.TTF",
+                    "https://aouadany.github.io/EduLab/GGSUBSCR.TTF",
+                    "https://aouadany.github.io/EduLab/GGSUPERS.TTF",
+                    "https://aouadany.github.io/EduLab/EduLab.TTF",
+                    "https://aouadany.github.io/EduLab/verdana.TTF"
+                ]
             };
 
-            window.addEventListener("load", () => {
-                const container = document.getElementById("swf-container");
-                const loadingScreen = document.getElementById("loading-screen");
-                
-                try {
-                    const ruffle = window.RufflePlayer.newest();
-                    const player = ruffle.createPlayer();
-                    container.appendChild(player);
-
-                    // Try to load the SWF file
-                    player.load({
-                        url: "chapter-1.swf",
-                        allowScriptAccess: true
-                    }).catch(error => {
-                        console.error("Load error:", error);
-                        loadingScreen.innerHTML = 
-                            `<p>Error loading SWF file: ${error.message}<br>
-                            Please check if 'chapter-1.swf' exists in the correct location.</p>`;
-                    });
-
-                    player.addEventListener("loadeddata", () => {
-                        loadingScreen.style.display = "none";
-                    });
-
-                    player.addEventListener("error", (e) => {
-                        console.error("Player error:", e);
-                        loadingScreen.innerHTML = 
-                            `<p>Error playing content: ${e.detail}<br>
-                            Please check browser console for more details.</p>`;
-                    });
-
-                } catch (error) {
-                    console.error("Setup error:", error);
-                    loadingScreen.innerHTML = 
-                        `<p>Failed to setup player: ${error.message}</p>`;
-                }
-            });
-        }
+            player.load("chapter-1.swf");
+            document.getElementById("loading-text").style.display = "none"; // Assuming there's a loading-text element
+        });
     </script>
+</head>
+<body>
+        <!-- Full-page SWF embedded via Ruffle -->
+    <div id="swf-container">
+        <object data="chapter-1.swf" width="100%" height="100%"></object>
+    </div>
 </body>
 </html>
